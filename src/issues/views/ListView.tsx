@@ -10,7 +10,7 @@ export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = useState<string[]>([])
 
 
-  const { issuesQuery } = useIssues({
+  const { issuesQuery, page, nextPage, previousPage } = useIssues({
     state,
     selectedLabels,
   });
@@ -28,7 +28,28 @@ export const ListView = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 mt-5">
       <div className="col-span-1 sm:col-span-2">
-        {issuesQuery.isLoading ? <LoadingSpinner /> : <IssueList issues={issues} onStateChange={setState} state={state} />}
+        {issuesQuery.isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <IssueList issues={issues} onStateChange={setState} state={state} />
+            <div className='flex justify-between items-center'>
+              <button
+                onClick={previousPage}
+                className='p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all'
+              >
+                Anteriores
+              </button>
+              <span>{page}</span>
+              <button
+                onClick={nextPage}
+                className='p-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all'
+              >
+                Siguientes
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="col-span-1 px-2">
