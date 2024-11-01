@@ -8,7 +8,6 @@ import { LoadingSpinner } from '../../share';
 export const IssueView = () => {
   const navigate = useNavigate();
   const params = useParams()
-  console.log(params);
   const issueNumber = Number(params.issueNumber ?? 0);
   const { issueQuery, commentsQuery } = useIssue(issueNumber);
 
